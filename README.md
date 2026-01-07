@@ -1,5 +1,4 @@
 # 工学云自动打卡系统实现原理
-
 ## 项目概述
 
 工学云自动打卡系统是一个基于Python的自动化工具，用于自动完成工学云平台的每日打卡任务。该项目通过模拟真实用户操作，实现自动登录、获取计划信息、执行打卡以及发送邮件通知等功能。
@@ -209,4 +208,4 @@ mainn.py是单次打卡的测试文件 gong_xue_yun.py是主程序入口（带�
 
 | 交流讨论 | 赞赏 |
 |-------|-------|
-| <img src="/image/1.png" width="200" alt="alt text"> | <img src="/image/2.jpg" width="200" alt="alt text"> |
+| <img src="/GongXueYunAutoCheckIn_CodeVersion-master/image/1.png" width="200" alt="alt text"> | <img src="/GongXueYunAutoCheckIn_CodeVersion-master/image/2.jpg" width="200" alt="alt text"> |
