@@ -5,7 +5,7 @@
 工学云自动打卡系统是一个基于Python的自动化工具，用于自动完成工学云平台的每日打卡任务。该项目通过模拟真实用户操作，实现自动登录、获取计划信息、执行打卡以及发送邮件通知等功能。
 
 ## 项目架构
-
+mainn.py是单次打卡的测试文件 gong_xue_yun.py是主程序入口（带定时功能）
 ### 主要目录结构
 
 ```
@@ -147,7 +147,50 @@
 3. 执行 [main.py](file:///d%3A/disk/GongXueYunAutoCheckIn_CodeVersion-master/GongXueYunAutoCheckIn_CodeVersion-master/main.py) 中的 [execute_tasks()](file:///d%3A/disk/GongXueYunAutoCheckIn_CodeVersion-master/GongXueYunAutoCheckIn_CodeVersion-master/main.py#L27-L48) 函数
 4. 依次执行登录、获取计划、打卡、发送邮件等步骤
 5. 记录操作日志
+6. 验证成功后运行gong_xue_yun.py,设置定时任务
 
+## 在GitHub Actions上部署
+
+要在GitHub Actions上自动运行打卡任务，需要配置以下环境变量作为GitHub Secrets：
+
+1. **用户认证信息**：
+   - `GX_USER_PHONE`: 工学云账号手机号
+   - `GX_USER_PASSWORD`: 工学云账号密码
+
+2. **打卡位置信息**：
+   - `GX_LOCATION_ADDRESS`: 打卡地址
+   - `GX_LOCATION_LATITUDE`: 纬度
+   - `GX_LOCATION_LONGITUDE`: 经度
+   - `GX_LOCATION_PROVINCE`: 省份
+   - `GX_LOCATION_CITY`: 城市
+   - `GX_LOCATION_AREA`: 区域
+
+3. **打卡设置**：
+   - `GX_CLOCKIN_MODE`: 打卡模式（weekday/everyday/customize）
+   - `GX_HOLIDAYS_CLOCKIN`: 节假日是否打卡（true/false）
+   - `GX_TIME_START`: 上班打卡时间（格式：HH:MM）
+   - `GX_TIME_END`: 下班打卡时间（格式：HH:MM）
+   - `GX_TIME_FLOAT`: 时间浮动范围（单位：分钟）
+
+4. **邮件通知设置**（可选）：
+   - `GX_SMTP_ENABLE`: 是否启用邮件通知（true/false）
+   - `GX_SMTP_HOST`: SMTP服务器地址
+   - `GX_SMTP_PORT`: SMTP端口
+   - `GX_SMTP_USERNAME`: SMTP用户名
+   - `GX_SMTP_PASSWORD`: SMTP密码
+   - `GX_SMTP_FROM`: 发件人名称
+   - `GX_SMTP_TO`: 收件人列表，用逗号分隔
+
+### 配置步骤：
+
+1. 在仓库的Settings -> Secrets and variables -> Actions中添加上述环境变量
+2. 提交并推送修改后的`.github/workflows/auto-checkin.yml`文件到仓库
+
+### 注意事项：
+
+- 配置文件不会被提交到仓库，所有敏感信息都通过GitHub Secrets管理
+- 定时任务在北京时间8:30和18:00执行，可在工作流文件中修改
+- GitHub Actions运行在UTC时间，配置中的cron表达式已考虑时区转换
 ## 安全性考虑
 
 - 用户密码使用AES加密存储
@@ -161,3 +204,9 @@
 - 配置化管理，灵活调整参数
 - 日志记录完整，便于调试
 
+有问题需要讨论
+
+
+| 交流讨论 | 赞赏 |
+|-------|-------|
+| <img src="/image/1.png" width="200" alt="alt text"> | <img src="/image/2.jpg" width="200" alt="alt text"> |
